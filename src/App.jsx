@@ -4,15 +4,26 @@ import CreateNote from "./pages/CreateNote";
 import EditNote from "./pages/EditNote";
 // import dummyNotes from "./dummy_notes"
 import { useState } from "react";
+import { useEffect } from "react";
 const App = () => {
-  const [notes , setNotes] = useState([])
-  console.log(notes)
+  const [notes, setNotes] = useState(
+    JSON.parse(localStorage.getItem("notes")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
+  console.log(notes);
   return (
     <main id="app">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Notes notes={notes} />} />
-          <Route path="/create-note" element={<CreateNote setNotes={setNotes} />} />
+          <Route
+            path="/create-note"
+            element={<CreateNote setNotes={setNotes} />}
+          />
           <Route path="/edite-note/:id" element={<EditNote />} />
         </Routes>
       </BrowserRouter>
