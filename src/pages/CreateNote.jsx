@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState } from "react";
-import { v4 as uuid} from "uuid"
+import { v4 as uuid } from "uuid";
+import useCreateDate from "../components/UseCreateDate";
 
 const CreateNote = () => {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
-
+  const date = useCreateDate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(title && details) {
-      const note = {id: uuid() , title , details }
-      console.log(note)
+    if (title && details) {
+      const note = { id: uuid(), title, details, date };
+      console.log(note);
     }
-  
-  }
+  };
 
   return (
     <section>
@@ -22,7 +22,9 @@ const CreateNote = () => {
         <Link to="/" className="btn">
           <IoIosArrowBack />
         </Link>
-        <button className="btn lg prinmary" onClick={handleSubmit}>Save</button>
+        <button className="btn lg prinmary" onClick={handleSubmit}>
+          Save
+        </button>
       </header>
       <form className="create-note__form" onSubmit={handleSubmit}>
         <input
