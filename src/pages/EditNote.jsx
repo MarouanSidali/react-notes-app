@@ -29,6 +29,12 @@ const EditNote = ({ notes, setNotes }) => {
     // redirect  ti home page
     navigate("/");
   };
+
+  const handleDelete = () => {
+    const newNotes = notes.filter((item) => item.id != id);
+    setNotes(newNotes);
+    navigate("/");
+  };
   return (
     <section>
       <header className="create-note__header">
@@ -38,7 +44,7 @@ const EditNote = ({ notes, setNotes }) => {
         <button className="btn lg prinmary" onClick={handleForm}>
           Save
         </button>
-        <button className="btn danger">
+        <button className="btn danger" onClick={handleDelete}>
           <RiDeleteBin6Line />
         </button>
       </header>
